@@ -99,7 +99,6 @@ public class Wait {
 	@SuppressWarnings("deprecation")
 	private static void until(WebDriver driver, Function<WebDriver, Boolean> waitCondition, Long timeoutInSeconds) {		
 		WebDriverWait webDriverWait = new WebDriverWait(driver, timeoutInSeconds);
-		//webDriverWait.withTimeout(timeoutInSeconds, TimeUnit.SECONDS);
 		try {
 			webDriverWait.until(waitCondition);
 		} catch (Exception e) {

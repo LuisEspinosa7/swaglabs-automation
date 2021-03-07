@@ -22,5 +22,13 @@
 		"email": "pedrog@gmail.com",
 		"username": "performance_glitch_user",
 		"password": "secret_sauce" 
+	},
+	{
+		"firstName": "Juan",
+		"lastName": "Aristizabal",
+		"age": 32,
+		"email": "juanes@gmail.com",
+		"username": "locked_out_user",
+		"password": "secret_sauce" 
 	}
 ]

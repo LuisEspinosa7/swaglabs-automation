@@ -13,9 +13,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import com.lsoftware.automation.swaglabs.async.Wait;
 import com.lsoftware.automation.swaglabs.managers.FileReaderManager;
+import com.lsoftware.automation.swaglabs.managers.WaitOperationManager;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LoginPage.
  *
@@ -53,6 +54,10 @@ public class LoginPage {
 	@FindBy(how = How.ID, using = "login-button")
 	private WebElement loginButton;
 
+	/** The error button. */
+	@FindBy(how = How.CSS, using = ".error-button")
+	private WebElement errorButton;
+
 	/**
 	 * Enter username.
 	 *
@@ -75,14 +80,17 @@ public class LoginPage {
 
 	/**
 	 * Click login button.
+	 *
+	 * @param expectedResult the expected result
 	 */
-	public void clickLoginButton() {
+	public void clickLoginButton(String expectedResult) {
 		logger.info("Clicking on login button");
 		loginButton.click();
-		
-		Wait.untilPageLoadComplete(driver);
+
+		WaitOperationManager.getInstance().
+			getWaitOperation(driver).clickButtonAndDecideWait(expectedResult, errorButton);
 	}
-	
+
 	/**
 	 * Navigate to login page.
 	 */
@@ -90,4 +98,14 @@ public class LoginPage {
 		driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
 	}
 
+	/**
+	 * Error button is present.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean errorButtonIsPresent() {
+		logger.info("Validating Error button is present.");
+		return errorButton.isDisplayed();
+	}
+	
 }

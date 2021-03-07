@@ -80,22 +80,19 @@ public class LoginSteps {
 		Customer customer = FileReaderManager.getInstance().getCustomerJsonReader().getCustomerByName(customerUsername);
 		
 		loginPage.enterUsername(customer.username);
-		loginPage.enterPassword(customer.password);
-		
-		//loginPage.enterUsername("standard_user");
-		//loginPage.enterPassword("secret_sauce");
+		loginPage.enterPassword(customer.password);		
 	}
 
 	/**
 	 * Click on login button.
 	 */
-	@When("^click on login button$")
-	public void click_on_login_button() {
+	@When("click on login button, wait {string} login")
+	public void click_on_login_button(String expectedResult) {
 		logger.info("=====================");
 		logger.info("click_on_login_button");
 		logger.info("=====================");
 
-		loginPage.clickLoginButton();
+		loginPage.clickLoginButton(expectedResult);
 	}
 
 	/**
@@ -109,5 +106,16 @@ public class LoginSteps {
 
 		assertTrue(productsPage.productsTitleIsPresent());
 	}
+	
+	
+	@Then("^error button and message is present$")
+	public void error_button_and_message_is_present() {
+		logger.info("===================================");
+		logger.info("error_button_and_message_is_present");
+		logger.info("===================================");
+		assertTrue(loginPage.errorButtonIsPresent());
+	}
+	
+	
 
 }
