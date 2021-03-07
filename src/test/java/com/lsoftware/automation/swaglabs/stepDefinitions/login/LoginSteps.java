@@ -7,14 +7,12 @@ package com.lsoftware.automation.swaglabs.stepDefinitions.login;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.lsoftware.automation.swaglabs.managers.PageObjectManager;
+import com.lsoftware.automation.swaglabs.managers.WebDriverManager;
 import com.lsoftware.automation.swaglabs.pageObjects.LoginPage;
 import com.lsoftware.automation.swaglabs.pageObjects.ProductsPage;
 
@@ -23,6 +21,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LoginSteps.
  *
@@ -44,7 +43,29 @@ public class LoginSteps {
 	/** The products page. */
 	ProductsPage productsPage;
 	
+	/** The page manager. */
 	PageObjectManager pageManager;
+	
+	/** The web driver manager. */
+	WebDriverManager webDriverManager;
+	
+	/**
+	 * Instantiates a new login steps.
+	 */
+	public LoginSteps() {
+		logger.info("============");
+		logger.info("initializing");
+		logger.info("============");
+		
+		webDriverManager = new WebDriverManager();
+		driver = webDriverManager.getdriver();
+				
+		pageManager = new PageObjectManager(driver);
+		
+		loginPage = pageManager.getLoginPage();
+		productsPage = pageManager.getProductsPage();
+	}
+	
 
 	/**
 	 * User is on login page.
@@ -54,16 +75,6 @@ public class LoginSteps {
 		logger.info("=====================");
 		logger.info("user_is_on_login_page");
 		logger.info("=====================");
-
-		String projectPath = System.getProperty("user.dir");
-		System.setProperty("webdriver.chrome.driver", projectPath + "/src/test/resources/drivers/chromedriver");
-		
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		pageManager = new PageObjectManager(driver);
-		loginPage = pageManager.getLoginPage();
 		
 		loginPage.navigateToLoginPage();
 	}
@@ -102,9 +113,9 @@ public class LoginSteps {
 		logger.info("products_section_is_present");
 		logger.info("===========================");
 		
-		productsPage = pageManager.getProductsPage();
+		
 		assertTrue(productsPage.productsTitleIsPresent());
-		driver.quit();
+		webDriverManager.closeDriver();
 	}
 	
 

@@ -13,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import com.lsoftware.automation.swaglabs.managers.FileReaderManager;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class LoginPage.
@@ -92,7 +94,7 @@ public class LoginPage {
 	 * Navigate to login page.
 	 */
 	public void navigateToLoginPage() {
-		driver.get("https://www.saucedemo.com/");
+		driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
 	}
 
 }
