@@ -9,12 +9,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
-import com.lsoftware.automation.swaglabs.managers.PageObjectManager;
-import com.lsoftware.automation.swaglabs.managers.WebDriverManager;
 import com.lsoftware.automation.swaglabs.pageObjects.LoginPage;
 import com.lsoftware.automation.swaglabs.pageObjects.ProductsPage;
+import com.lsoftware.automation.swaglabs.testContext.TestContext;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -34,38 +32,28 @@ public class LoginSteps {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(LoginSteps.class);
 
-	/** The driver. */
-	WebDriver driver;
+	/** The test context. */
+	TestContext testContext;
 	
 	/** The login page. */
 	LoginPage loginPage;
-	
+
 	/** The products page. */
 	ProductsPage productsPage;
-	
-	/** The page manager. */
-	PageObjectManager pageManager;
-	
-	/** The web driver manager. */
-	WebDriverManager webDriverManager;
-	
+
 	/**
 	 * Instantiates a new login steps.
 	 */
-	public LoginSteps() {
+	public LoginSteps(TestContext context) {
 		logger.info("============");
 		logger.info("initializing");
 		logger.info("============");
-		
-		webDriverManager = new WebDriverManager();
-		driver = webDriverManager.getdriver();
-				
-		pageManager = new PageObjectManager(driver);
-		
-		loginPage = pageManager.getLoginPage();
-		productsPage = pageManager.getProductsPage();
+
+		testContext = context;
+
+		loginPage = testContext.getPageObjectManager().getLoginPage();
+		productsPage = testContext.getPageObjectManager().getProductsPage();
 	}
-	
 
 	/**
 	 * User is on login page.
@@ -75,7 +63,7 @@ public class LoginSteps {
 		logger.info("=====================");
 		logger.info("user_is_on_login_page");
 		logger.info("=====================");
-		
+
 		loginPage.navigateToLoginPage();
 	}
 
@@ -87,9 +75,9 @@ public class LoginSteps {
 		logger.info("=================================");
 		logger.info("fill_username_and_password_fields");
 		logger.info("=================================");
-		
+
 		loginPage.enterUsername("standard_user");
-		loginPage.enterPassword("secret_sauce");		
+		loginPage.enterPassword("secret_sauce");
 	}
 
 	/**
@@ -100,10 +88,10 @@ public class LoginSteps {
 		logger.info("=====================");
 		logger.info("click_on_login_button");
 		logger.info("=====================");
-		
-		loginPage.clickLoginButton();		
+
+		loginPage.clickLoginButton();
 	}
-	
+
 	/**
 	 * Products section is present.
 	 */
@@ -112,11 +100,9 @@ public class LoginSteps {
 		logger.info("===========================");
 		logger.info("products_section_is_present");
 		logger.info("===========================");
-		
-		
+
 		assertTrue(productsPage.productsTitleIsPresent());
-		webDriverManager.closeDriver();
+		testContext.getWebDriverManager().closeDriver();
 	}
-	
 
 }
