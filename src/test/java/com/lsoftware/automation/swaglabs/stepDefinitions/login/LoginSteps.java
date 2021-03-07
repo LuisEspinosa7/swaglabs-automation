@@ -10,16 +10,17 @@ import static org.junit.Assert.assertTrue;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.lsoftware.automation.swaglabs.managers.FileReaderManager;
 import com.lsoftware.automation.swaglabs.pageObjects.LoginPage;
 import com.lsoftware.automation.swaglabs.pageObjects.ProductsPage;
 import com.lsoftware.automation.swaglabs.testContext.TestContext;
+import com.lsoftware.automation.swaglabs.testDataTypes.Customer;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LoginSteps.
  *
@@ -70,14 +71,19 @@ public class LoginSteps {
 	/**
 	 * Fill username and password fields.
 	 */
-	@And("^fill username and password fields$")
-	public void fill_username_and_password_fields() {
+	@And("^fill \\\"(.*)\\\" credentials$")
+	public void fill_username_and_password_fields(String customerUsername) {
 		logger.info("=================================");
 		logger.info("fill_username_and_password_fields");
 		logger.info("=================================");
 
-		loginPage.enterUsername("standard_user");
-		loginPage.enterPassword("secret_sauce");
+		Customer customer = FileReaderManager.getInstance().getCustomerJsonReader().getCustomerByName(customerUsername);
+		
+		loginPage.enterUsername(customer.username);
+		loginPage.enterPassword(customer.password);
+		
+		//loginPage.enterUsername("standard_user");
+		//loginPage.enterPassword("secret_sauce");
 	}
 
 	/**
@@ -102,7 +108,6 @@ public class LoginSteps {
 		logger.info("===========================");
 
 		assertTrue(productsPage.productsTitleIsPresent());
-		testContext.getWebDriverManager().closeDriver();
 	}
 
 }

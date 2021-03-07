@@ -14,9 +14,8 @@ import com.lsoftware.automation.swaglabs.enums.DriverType;
 import com.lsoftware.automation.swaglabs.enums.EnvironmentType;
 import com.lsoftware.automation.swaglabs.exceptions.CustomPropertyNotFound;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class LoginSteps.
+ * The Class ConfigFileReader.
  *
  * @author Luis Espinosa
  * @version 1.0
@@ -56,7 +55,6 @@ public class ConfigFileReader {
 		return System.getProperty("user.dir");
 	}
 
-	
 	/**
 	 * Gets the chrome driver path.
 	 *
@@ -70,8 +68,7 @@ public class ConfigFileReader {
 			throw new CustomPropertyNotFound("chromeDriverPath not specified in the configuration.properties file.");
 		}
 	}
-	
-	
+
 	/**
 	 * Gets the firefox driver path.
 	 *
@@ -158,6 +155,20 @@ public class ConfigFileReader {
 		if (windowSize != null)
 			return Boolean.valueOf(windowSize);
 		return true;
+	}
+
+	/**
+	 * Gets the test data resource path.
+	 *
+	 * @return the test data resource path
+	 */
+	public String getTestDataResourcePath() {
+		String testDataResourcePath = properties.getProperty("testDataResourcePath");
+		if (testDataResourcePath != null)
+			return testDataResourcePath;
+		else
+			throw new CustomPropertyNotFound(
+					"Test Data Resource Path not specified in the configuration.properties file for the Key:testDataResourcePath");
 	}
 
 }

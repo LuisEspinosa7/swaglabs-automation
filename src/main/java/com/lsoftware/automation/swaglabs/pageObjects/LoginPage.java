@@ -13,19 +13,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import com.lsoftware.automation.swaglabs.async.Wait;
 import com.lsoftware.automation.swaglabs.managers.FileReaderManager;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LoginPage.
  *
  * @author Luis Espinosa
  * @version 1.0
  * @since 04/03/2021
- */
-/**
- * @author luis
- *
  */
 public class LoginPage {
 
@@ -83,11 +79,8 @@ public class LoginPage {
 	public void clickLoginButton() {
 		logger.info("Clicking on login button");
 		loginButton.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			logger.info("Error en espera", e);
-		}
+		
+		Wait.untilPageLoadComplete(driver);
 	}
 	
 	/**
