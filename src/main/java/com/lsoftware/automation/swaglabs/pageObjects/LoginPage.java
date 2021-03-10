@@ -16,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.lsoftware.automation.swaglabs.managers.FileReaderManager;
 import com.lsoftware.automation.swaglabs.managers.WaitOperationManager;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LoginPage.
  *

@@ -14,6 +14,7 @@ import com.lsoftware.automation.swaglabs.enums.DriverType;
 import com.lsoftware.automation.swaglabs.enums.EnvironmentType;
 import com.lsoftware.automation.swaglabs.exceptions.CustomPropertyNotFound;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ConfigFileReader.
  *
@@ -169,6 +170,23 @@ public class ConfigFileReader {
 		else
 			throw new CustomPropertyNotFound(
 					"Test Data Resource Path not specified in the configuration.properties file for the Key:testDataResourcePath");
+	}
+	
+	
+	
+	
+	/**
+	 * Gets the success login customer username.
+	 *
+	 * @return the success login customer username
+	 */
+	public String getSuccessLoginCustomerUsername() {
+		String customerUsername = properties.getProperty("successLoginCustomerUsername");
+		if (customerUsername != null) {
+			return customerUsername;
+		} else {
+			throw new CustomPropertyNotFound("successLoginCustomerUsername not specified in the Configuration.properties file.");
+		}
 	}
 
 }

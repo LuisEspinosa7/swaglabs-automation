@@ -21,6 +21,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LoginSteps.
  *
@@ -35,7 +36,7 @@ public class LoginSteps {
 
 	/** The test context. */
 	TestContext testContext;
-	
+
 	/** The login page. */
 	LoginPage loginPage;
 
@@ -44,6 +45,8 @@ public class LoginSteps {
 
 	/**
 	 * Instantiates a new login steps.
+	 *
+	 * @param context the context
 	 */
 	public LoginSteps(TestContext context) {
 		logger.info("============");
@@ -70,6 +73,8 @@ public class LoginSteps {
 
 	/**
 	 * Fill username and password fields.
+	 *
+	 * @param customerUsername the customer username
 	 */
 	@And("^fill \\\"(.*)\\\" credentials$")
 	public void fill_username_and_password_fields(String customerUsername) {
@@ -78,13 +83,15 @@ public class LoginSteps {
 		logger.info("=================================");
 
 		Customer customer = FileReaderManager.getInstance().getCustomerJsonReader().getCustomerByName(customerUsername);
-		
+
 		loginPage.enterUsername(customer.username);
-		loginPage.enterPassword(customer.password);		
+		loginPage.enterPassword(customer.password);
 	}
 
 	/**
 	 * Click on login button.
+	 *
+	 * @param expectedResult the expected result
 	 */
 	@When("click on login button, wait {string} login")
 	public void click_on_login_button(String expectedResult) {
@@ -106,8 +113,10 @@ public class LoginSteps {
 
 		assertTrue(productsPage.productsTitleIsPresent());
 	}
-	
-	
+
+	/**
+	 * Error button and message is present.
+	 */
 	@Then("^error button and message is present$")
 	public void error_button_and_message_is_present() {
 		logger.info("===================================");
@@ -115,7 +124,5 @@ public class LoginSteps {
 		logger.info("===================================");
 		assertTrue(loginPage.errorButtonIsPresent());
 	}
-	
-	
 
 }

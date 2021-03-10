@@ -18,6 +18,7 @@ import com.lsoftware.automation.swaglabs.testDataTypes.Customer;
 
 import io.cucumber.messages.internal.com.google.gson.Gson;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CustomerJsonDataReader.
  *
@@ -72,6 +73,16 @@ public class CustomerJsonDataReader {
 	 */
 	public final Customer getCustomerByName(String customerUsername) {
 		return customerList.stream().filter(x -> x.username.equalsIgnoreCase(customerUsername)).findAny().get();
+	}
+	
+	/**
+	 * Gets the customer by email.
+	 *
+	 * @param customerEmail the customer email
+	 * @return the customer by email
+	 */
+	public final Customer getCustomerByEmail(String customerEmail) {
+		return customerList.stream().filter(x -> x.email.equalsIgnoreCase(customerEmail)).findAny().get();
 	}
 
 }

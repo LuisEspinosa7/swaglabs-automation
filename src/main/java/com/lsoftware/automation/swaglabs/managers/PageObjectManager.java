@@ -7,11 +7,13 @@ package com.lsoftware.automation.swaglabs.managers;
 
 import org.openqa.selenium.WebDriver;
 
+import com.lsoftware.automation.swaglabs.pageObjects.HeaderPage;
 import com.lsoftware.automation.swaglabs.pageObjects.LoginPage;
 import com.lsoftware.automation.swaglabs.pageObjects.ProductsPage;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class LoginPage.
+ * The Class PageObjectManager.
  *
  * @author Luis Espinosa
  * @version 1.0
@@ -27,6 +29,10 @@ public class PageObjectManager {
 	
 	/** The products page. */
 	ProductsPage productsPage;
+	
+	/** The header page. */
+	HeaderPage headerPage;
+	
 	
 	/**
 	 * Instantiates a new page object manager.
@@ -53,6 +59,15 @@ public class PageObjectManager {
 	 */
 	public ProductsPage getProductsPage() {
 		return (productsPage == null) ? productsPage = new ProductsPage(driver) : productsPage;
+	}
+	
+	/**
+	 * Gets the header page.
+	 *
+	 * @return the header page
+	 */
+	public HeaderPage getHeaderPage() {
+		return (headerPage == null) ? headerPage = new HeaderPage(driver) : headerPage;
 	}
 
 	

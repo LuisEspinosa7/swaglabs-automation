@@ -16,10 +16,10 @@ package com.lsoftware.automation.swaglabs.enums;
 public enum ExpectedResultTypes {
 	
 	/** The success. */
-	SUCCESS("success"),
+	SUCCESS("SUCCESS"),
 	
 	/** The fail. */
-	FAIL("fail");
+	FAIL("FAIL");
 	
 	/** The expected type. */
 	private final String expectedType;
